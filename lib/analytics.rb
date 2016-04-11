@@ -9,6 +9,14 @@ module WebLogStat
       @log_entries = log_entries
     end
 
+    def most_hits_pages
+      collect_hits_by_page.sort_by(&:total_hits).reverse
+    end
+
+    def unique_hits
+      collect_hits_by_page.sort_by(&:unique_hits).reverse
+    end
+
     private
 
     def collect_hits_by_page 
@@ -34,7 +42,16 @@ module WebLogStat
     end
 
     def page_hits(page, ip_addr)
-      ph = Struct.new(:page, :ip_addresses)
+      ph = Struct.new(:page, :ip_addresses) do
+        def total_hits
+          self.ip_addresses.size  
+        end
+
+        def unique_hits
+          self.ip_addresses.uniq.size 
+        end
+
+      end
       ph.new(page, ip_addr)
     end
 
