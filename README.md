@@ -1,5 +1,6 @@
 == WeblogStat
 
-Displays:
-* Most viewed pages from weblog sorted from most to less
-* Displays pages with most unique page views oederd from most to less
+=== How to use it
+
+* `$` cd web_log_stat/scripts
+* `$` ./show_stats.sh ./webstat.log
